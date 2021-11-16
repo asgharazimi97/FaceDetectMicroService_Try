@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Faces", "Faces", "{2FEB5C0A-D3A1-4F84-9019-BEDD9FADB887}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FasesApi", "Faces\FasesApi\FasesApi.csproj", "{260C956F-5546-4D37-90B9-A50CBD5A8F69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{260C956F-5546-4D37-90B9-A50CBD5A8F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{260C956F-5546-4D37-90B9-A50CBD5A8F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{260C956F-5546-4D37-90B9-A50CBD5A8F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{260C956F-5546-4D37-90B9-A50CBD5A8F69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{260C956F-5546-4D37-90B9-A50CBD5A8F69} = {2FEB5C0A-D3A1-4F84-9019-BEDD9FADB887}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E0D1031-DC94-45BC-B4DF-270CAB479DB6}
+	EndGlobalSection
+EndGlobal
