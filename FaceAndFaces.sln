@@ -5,7 +5,15 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Faces", "Faces", "{2FEB5C0A-D3A1-4F84-9019-BEDD9FADB887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FasesApi", "Faces\FasesApi\FasesApi.csproj", "{260C956F-5546-4D37-90B9-A50CBD5A8F69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FasesApi", "Faces\FasesApi\FasesApi.csproj", "{260C956F-5546-4D37-90B9-A50CBD5A8F69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Faces.SharedLib", "Faces.SharedLib", "{4962125D-EA40-4A60-B42F-48A371830D24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.InterfacesConstants", "Faces.SharedLib\Messaging.InterfacesConstants\Messaging.InterfacesConstants.csproj", "{EFC51556-50A1-4878-8837-8F044BC11200}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Faces.Web", "Faces.Web", "{58052074-A7D7-420E-ADCF-0A91ADF3B10C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faces.WebMVC", "Faces.Web\Faces.WebMVC\Faces.WebMVC.csproj", "{E1C456D8-04A7-4430-A26C-77D9D58A38A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +25,22 @@ Global
 		{260C956F-5546-4D37-90B9-A50CBD5A8F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{260C956F-5546-4D37-90B9-A50CBD5A8F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{260C956F-5546-4D37-90B9-A50CBD5A8F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFC51556-50A1-4878-8837-8F044BC11200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFC51556-50A1-4878-8837-8F044BC11200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFC51556-50A1-4878-8837-8F044BC11200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFC51556-50A1-4878-8837-8F044BC11200}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C456D8-04A7-4430-A26C-77D9D58A38A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C456D8-04A7-4430-A26C-77D9D58A38A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C456D8-04A7-4430-A26C-77D9D58A38A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C456D8-04A7-4430-A26C-77D9D58A38A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{260C956F-5546-4D37-90B9-A50CBD5A8F69} = {2FEB5C0A-D3A1-4F84-9019-BEDD9FADB887}
+		{EFC51556-50A1-4878-8837-8F044BC11200} = {4962125D-EA40-4A60-B42F-48A371830D24}
+		{E1C456D8-04A7-4430-A26C-77D9D58A38A3} = {58052074-A7D7-420E-ADCF-0A91ADF3B10C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E0D1031-DC94-45BC-B4DF-270CAB479DB6}
