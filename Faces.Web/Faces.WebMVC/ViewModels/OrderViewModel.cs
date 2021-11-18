@@ -11,7 +11,7 @@ namespace Faces.WebMVC.ViewModels
         public Guid OrderId { get; set; }
         public string UserEmail { get; set; }
         public IFormFile File { get; set; }
-        public string ImageUrl { get; set; }
+        public string PicUrl { get; set; }
         public string StatusString { get; set; }
         public byte[] ImageData { get; set; }
     }
