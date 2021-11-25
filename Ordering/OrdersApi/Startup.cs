@@ -55,6 +55,7 @@ namespace OrdersApi
 
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddSingleton<IHostedService, BusService>();
+            services.AddHttpClient();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

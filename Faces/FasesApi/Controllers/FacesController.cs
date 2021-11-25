@@ -13,7 +13,7 @@ namespace FasesApi.Controllers
     [ApiController]
     public class FacesController : ControllerBase
     {
-        [HttpPost("WithInput")]
+        [HttpPost("WithFile")]
         public async Task<List<byte[]>> ReadFaces(IFormFile file)
         {
             using (var ms = new MemoryStream(2048))
@@ -24,14 +24,14 @@ namespace FasesApi.Controllers
             }
         }
 
-        [HttpPost("NoInput")]
-        public async Task<List<byte[]>> ReadFaces()
+        [HttpPost("WithOrderId/{orderId}")]
+        public async Task<Tuple<List<byte[]>, Guid>> ReadFaces(Guid orderId)
         {
             using (var ms = new MemoryStream(2048))
             {
                 await Request.Body.CopyToAsync(ms);
                 var faces = GetFaces(ms.ToArray());
-                return faces;
+                return new Tuple<List<byte[]>, Guid>(faces, orderId);
             }
         }
 
