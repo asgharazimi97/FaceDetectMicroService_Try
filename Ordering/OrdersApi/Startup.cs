@@ -41,6 +41,7 @@ namespace OrdersApi
              c =>
              {
                  c.AddConsumer<RegisterOrderCommandConsumer>();
+                 c.AddConsumer<OrderDispatchedEventConsumer>();
              });
             services.AddSingleton(pro => Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
@@ -50,6 +51,13 @@ namespace OrdersApi
                     e.PrefetchCount = 16;
                     e.UseMessageRetry(x => x.Interval(2, TimeSpan.FromSeconds(10)));
                     e.Consumer<RegisterOrderCommandConsumer>(pro);
+                });
+
+                cfg.ReceiveEndpoint(RabbitMqMassTransitConstants.OrderDispatchedServiceQueue, e =>
+                {
+                    e.PrefetchCount = 16;
+                    e.UseMessageRetry(x => x.Interval(2, TimeSpan.FromSeconds(10)));
+                    e.Consumer<OrderDispatchedEventConsumer>(pro);
                 });
             }));
 

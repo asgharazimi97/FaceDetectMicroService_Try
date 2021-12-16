@@ -1,5 +1,6 @@
 ﻿using MassTransit;
 using Messaging.InterfacesConstants.Commands;
+using Messaging.InterfacesConstants.Events;
 using Newtonsoft.Json;
 using OrdersApi.Models;
 using OrdersApi.Persistance;
@@ -33,7 +34,15 @@ namespace OrdersApi.Messages.Consumers
                 Guid orderId = orderDetailData.Item2;
 
                 await SaveOrderDetail(orderId, faces);
+                await context.Publish<IOrderProcessedEvent>(new
+                {
+                    OrderId = orderId,
+                    result.UserEmail,
+                    Faces = faces,
+                    result.PicUrl
+                });
             }
+
             //return Task.FromResult(true);
         }
 
