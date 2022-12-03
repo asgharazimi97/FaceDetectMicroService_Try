@@ -1,7 +1,9 @@
 ﻿using MassTransit;
 using Messaging.InterfacesConstants.Commands;
 using Messaging.InterfacesConstants.Events;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
+using OrdersApi.Hubs;
 using OrdersApi.Models;
 using OrdersApi.Persistance;
 using System;
@@ -16,11 +18,15 @@ namespace OrdersApi.Messages.Consumers
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IHttpClientFactory _httpClient;
+        private readonly IHubContext<OrderHub> _hubContext;
 
-        public RegisterOrderCommandConsumer(IOrderRepository orderRepository, IHttpClientFactory httpClient)
+        public RegisterOrderCommandConsumer(IOrderRepository orderRepository
+            , IHttpClientFactory httpClient
+            , IHubContext<OrderHub> hubContext)
         {
             _orderRepository = orderRepository;
             _httpClient = httpClient;
+            _hubContext = hubContext;
         }
         public async Task Consume(ConsumeContext<IRegisterOrderCommand> context)
         {
@@ -28,12 +34,14 @@ namespace OrdersApi.Messages.Consumers
             if (result.UserEmail != null && result.PicUrl != null && result.ImageData != null)
             {
                 SaveOrder(result);
+                await _hubContext.Clients.All.SendAsync("UpdateOrders", "New Order Created", result.OrderId);
                 var client = _httpClient.CreateClient();
-                var orderDetailData =await GetFacesFromFaceAliAsync(client, result.ImageData, result.OrderId);
+                var orderDetailData = await GetFacesFromFaceAliAsync(client, result.ImageData, result.OrderId);
                 List<byte[]> faces = orderDetailData.Item1;
                 Guid orderId = orderDetailData.Item2;
 
                 await SaveOrderDetail(orderId, faces);
+                await _hubContext.Clients.All.SendAsync("UpdateOrders", "Order Processed", result.OrderId);
                 await context.Publish<IOrderProcessedEvent>(new
                 {
                     OrderId = orderId,

@@ -18,6 +18,7 @@ using OrdersApi.Messages.Consumers;
 using OrdersApi.Services;
 using OrdersApi.Persistance;
 using Microsoft.EntityFrameworkCore;
+using OrdersApi.Hubs;
 
 namespace OrdersApi
 {
@@ -61,6 +62,11 @@ namespace OrdersApi
                 });
             }));
 
+            services.AddSignalR()
+                .AddJsonProtocol(options =>
+                {
+                    options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+                });
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddSingleton<IHostedService, BusService>();
             services.AddHttpClient();
@@ -68,6 +74,18 @@ namespace OrdersApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OrdersApi", Version = "v1" });
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .SetIsOriginAllowed((host) => true)
+                       .AllowCredentials());
+
+
             });
         }
 
@@ -82,14 +100,15 @@ namespace OrdersApi
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("CorsPolicy");
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<OrderHub>("/orderhub");
             });
         }
     }

@@ -1,5 +1,7 @@
 ﻿using MassTransit;
 using Messaging.InterfacesConstants.Events;
+using Microsoft.AspNetCore.SignalR;
+using OrdersApi.Hubs;
 using OrdersApi.Persistance;
 using System;
 using System.Collections.Generic;
@@ -11,17 +13,19 @@ namespace OrdersApi.Messages.Consumers
     public class OrderDispatchedEventConsumer : IConsumer<IOrderDispatchedEvent>
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IHubContext<OrderHub> _hubContext;
 
-        public OrderDispatchedEventConsumer(IOrderRepository orderRepository)
+        public OrderDispatchedEventConsumer(IOrderRepository orderRepository, IHubContext<OrderHub> hubContext)
         {
             _orderRepository = orderRepository;
+            _hubContext = hubContext;
         }
-        public Task Consume(ConsumeContext<IOrderDispatchedEvent> context)
+        public async Task Consume(ConsumeContext<IOrderDispatchedEvent> context)
         {
             var message = context.Message;
             var orderId = message.OrderId;
             UpdateDatabase(orderId);
-            return Task.CompletedTask;
+            await _hubContext.Clients.All.SendAsync("UpdateOrders", new object[] {"Order Dispatched", orderId });
         }
 
         private void UpdateDatabase(Guid orderId)
